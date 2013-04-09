@@ -1,0 +1,89 @@
+body {
+  background: #333;
+  color: #FFF;
+}
+
+.container {
+  max-width: 1000px;
+  width: 100%;
+}
+
+h1,
+h2 {
+  margin: 1%;
+}
+
+.account {
+  overflow: hidden;
+}
+
+.account {
+  background: #222;
+  float: left;
+  margin: 1%;
+  overflow: hidden;
+  padding: 1%;
+  position: relative;
+  width: 29%;
+}
+
+.account:after {
+  border: 50px solid #2A2A2A;
+  border-bottom-width: 50px;
+  border-top-width: 45px;
+  border-top-color: transparent;
+  border-left-color: transparent;
+  bottom: 0;
+  content: '';
+  position: absolute;
+  right: 0;
+  height: 0;
+  width: 0;
+}
+
+.account-name,
+.account-number,
+.account-bank,
+.account-currency {
+  background: none;
+  border: none;
+  color: #FFF;
+  display: block;
+  font-family: $sansFontFamily;
+  font-size: 16px;
+  margin: 5px 0;
+  width: 100%;
+}
+
+.account-name {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.account-bank {
+  font-style: italic;
+}
+
+.account-currency {
+  bottom: 5px;
+  color: #FFF;
+  font-size: 40px;
+  height: 40px;
+  line-height: 40px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  right: 5px;
+  text-align: right;
+  width: 40px;
+  z-index: 2;
+}
+
+.new-account {
+  .account-name,
+  .account-number,
+  .account-bank,
+  .account-currency {
+    background: #2A2A2A;
+  }
+}
