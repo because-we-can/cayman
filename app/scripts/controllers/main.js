@@ -2,7 +2,7 @@
 
 angular.module('caymanApp')
     .controller('MainCtrl', function ($scope) {
-      $scope.accounts = JSON.parse(localStorage.getItem('cayman.accounts'));
+      $scope.accounts = JSON.parse(localStorage.getItem('cayman.accounts')) || [];
 
       $scope.addAccount = function (account) {
         $scope.accounts.push(account);
