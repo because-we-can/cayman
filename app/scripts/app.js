@@ -4,8 +4,8 @@ angular.module('caymanApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/accounts.html',
+        controller: 'AccountsCtrl'
       })
       .otherwise({
         redirectTo: '/'
