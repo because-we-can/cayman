@@ -2,8 +2,6 @@
 
 angular.module('caymanApp')
   .controller('MainCtrl', function ($scope) {
-    $scope.accounts = [
-      {name:'Check account'},
-      {name:'Savings account'}
-    ];
+    $scope.accounts = ['Check', 'Savings'];
+    $scope.budgets = ['Vacations', 'New laptop'];
   });
