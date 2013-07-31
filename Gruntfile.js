@@ -71,6 +71,12 @@ module.exports = function (grunt) {
             ];
           }
         }
+      },
+      dist: {
+        options: {
+          port: 9002,
+          base: 'dist'
+        }
       }
     },
     open: {
