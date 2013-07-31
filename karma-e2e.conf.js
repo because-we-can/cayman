@@ -1,7 +1,7 @@
 // Karma E2E configuration
 
 // base path, that will be used to resolve files and exclude
-basePath = '.';
+basePath = '';
 
 // list of files / patterns to load in the browser
 files = [
@@ -31,7 +31,7 @@ colors = true;
 logLevel = LOG_INFO;
 
 // enable / disable watching file and executing tests whenever any file changes
-autoWatch = false;
+autoWatch = true;
 
 // Start these browsers, currently available:
 // - Chrome
@@ -50,6 +50,8 @@ captureTimeout = 5000;
 // if true, it capture browsers, run tests and exit
 singleRun = false;
 
-proxies =  {
-    '/': 'http://localhost:9000/' // Keep this in sync with localhost port in Gruntfile.
-  };
+proxies = {
+  '/': 'http://localhost:9001/' // Keep this in sync with localhost port in Gruntfile.
+};
+
+urlRoot = 'k';

@@ -1,25 +1,24 @@
 'use strict';
 
-describe('Cayman App', function() {
+describe('Cayman App', function () {
 
-  describe('Main view', function() {
+  describe('Main view', function () {
 
-    beforeEach(function() {
+    beforeEach(function () {
       browser().navigateTo('/');
-      expect(browser().location().url()).toBe('hi');
     });
 
 
-    it('should display the accounts list', function() {
+    it('should display the accounts list', function () {
       expect(repeater('.accounts li', 'accounts list').count()).toBe(2);
-      expect(repeater('.accounts li', 'accounts list').row(0)).toBe('Check');
-      expect(repeater('.accounts li', 'accounts list').row(1)).toBe('Savings');
+      expect(repeater('.accounts li', 'accounts list').row(0)).toEqual(['Check']);
+      expect(repeater('.accounts li', 'accounts list').row(1)).toEqual(['Savings']);
     });
 
-    it('should display the budgets list', function() {
+    it('should display the budgets list', function () {
       expect(repeater('.budgets li', 'budgets list').count()).toBe(2);
-      expect(repeater('.budgets li', 'budgets list').row(0)).toBe('Vacations');
-      expect(repeater('.budgets li', 'budgets list').row(1)).toBe('New Laptop');
+      expect(repeater('.budgets li', 'budgets list').row(0)).toEqual(['Vacations']);
+      expect(repeater('.budgets li', 'budgets list').row(1)).toEqual(['New laptop']);
     });
   });
 });
