@@ -105,11 +105,9 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
-        singleRun: true
       },
       e2e: {
         configFile: 'karma-e2e.conf.js',
-        singleRun: false
       }
     },
     coffee: {
@@ -295,7 +293,6 @@ module.exports = function (grunt) {
     'clean:server',
     'coffee',
     'compass',
-    'connect:test',
     'karma:unit'
   ]);
 
