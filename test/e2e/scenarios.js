@@ -5,7 +5,8 @@ describe('Cayman App', function() {
   describe('Main view', function() {
 
     beforeEach(function() {
-      browser().navigateTo('../../app/index.html');
+      browser().navigateTo('/');
+      expect(browser().location().url()).toBe('hi');
     });
 
 
