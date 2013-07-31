@@ -105,9 +105,11 @@ module.exports = function (grunt) {
     karma: {
       unit: {
         configFile: 'karma.conf.js',
+        singleRun: true
       },
       e2e: {
         configFile: 'karma-e2e.conf.js',
+        singleRun: true
       }
     },
     coffee: {
@@ -307,7 +309,8 @@ module.exports = function (grunt) {
   grunt.registerTask('build', [
     'clean:dist',
     'jshint',
-    'test',
+    'test:unit',
+    'test:e2e',
     'coffee',
     'compass:dist',
     'useminPrepare',
