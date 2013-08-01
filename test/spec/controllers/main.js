@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('MainCtrl tests', function () {
 
   // load the controller's module
   beforeEach(module('caymanApp'));
@@ -28,7 +28,8 @@ describe('Controller: MainCtrl', function () {
   it('should attach 2 budgets to the scope', function () {
     expect(scope.budgets).toBeDefined();
 
-    var budgets = scope.budgets
+    var budgets = scope.budgets;
+    expect(budgets.length).toBe(2);
     expect(budgets[0]).toBe('Vacations');
     expect(budgets[1]).toBe('New laptop');
   });
