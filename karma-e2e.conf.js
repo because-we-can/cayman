@@ -54,4 +54,4 @@ proxies = {
   '/': 'http://localhost:9001/' // Keep this in sync with localhost port in Gruntfile.
 };
 
-urlRoot = 'k';
+urlRoot = '/k/';
