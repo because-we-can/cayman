@@ -1,13 +1,17 @@
 <div ng-controller="MainCtrl">
   <h1>Cayman</h1>
 
-  <h3>Accounts</h3>
-  <ul class="accounts">
-    <li ng-repeat="account in accounts">{{account}}</li>
-  </ul>
+  <div class="accounts">
+    <h3>{{accounts.length}} account(s)</h3>
+    <ul>
+      <li ng-repeat="account in accounts">{{account}}</li>
+    </ul>
+  </div>
 
-  <h3>Budgets</h3>
-  <ul class="budgets">
-    <li ng-repeat="budget in budgets">{{budget}}</li>
-  </ul>
+  <div class="budgets">
+    <h3>{{budgets.length}} budget(s)</h3>
+    <ul class="budgets">
+      <li ng-repeat="budget in budgets">{{budget}}</li>
+    </ul>
+  </div>
 </div>
