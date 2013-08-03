@@ -5,13 +5,26 @@
     <h3>{{accounts.length}} account(s)</h3>
     <ul>
       <li ng-repeat="account in accounts">{{account}}</li>
+      <li>
+        <form name="newAccountForm">
+          <input name="newAccountInput" type="text" ng-model="newAccountName" required>
+          <button ng-disabled = "newAccountForm.newAccountInput.$error.required" ng-click="addAccount(newAccountName)">+</button>
+        </form>
+      </li>
     </ul>
+
   </div>
 
   <div class="budgets">
     <h3>{{budgets.length}} budget(s)</h3>
     <ul class="budgets">
       <li ng-repeat="budget in budgets">{{budget}}</li>
+      <li>
+        <form name="newBudgetForm">
+          <input name="newBudgetInput" type="text" ng-model="newBudgetName" required>
+          <button ng-disabled="newBudgetForm.newBudgetInput.$error.required" ng-click="addBudget(newBudgetName)">+</button>
+        </form>
+      </li>
     </ul>
   </div>
 </div>
