@@ -8,8 +8,6 @@ describe('MainCtrl tests', function () {
   var ACCOUNT_NAME = 'A test account';
   var BUDGET_NAME = "A budget name";
 
-  //beforeEach(module('caymanServices'));
-
   beforeEach(inject(function ($controller, $rootScope) {
     mockLocalStorageService = angular.injector(['caymanServices']).get('localStorageService');
     spyOn(mockLocalStorageService, 'getAccounts').andReturn([{name:ACCOUNT_NAME}]);
