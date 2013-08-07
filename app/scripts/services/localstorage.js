@@ -12,17 +12,17 @@ angular.module('caymanServices', [])
     getAccounts : function() {
       return JSON.parse(window.localStorage.getItem(keys.accounts) || '[]');
     },
-    addAccounts : function(accountsToAdd) {
-      if(!accountsToAdd || accountsToAdd.length == 0) return;
-      var newAccounts = this.getAccounts().concat(accountsToAdd);
+    addAccount : function(accountToAdd) {
+      if(!accountToAdd) return;
+      var newAccounts = this.getAccounts().concat(accountToAdd);
       window.localStorage.setItem(keys.accounts, JSON.stringify(newAccounts));
     },
     getBudgets : function() {
       return JSON.parse(window.localStorage.getItem(keys.budgets) || '[]');
     },
-    addBudgets : function (budgetsToAdd) {
-      if(!budgetsToAdd || budgetsToAdd.length == 0) return;
-      var newBudgets = this.getBudgets().concat(budgetsToAdd);
+    addBudget : function (budgetToAdd) {
+      if(!budgetToAdd) return;
+      var newBudgets = this.getBudgets().concat(budgetToAdd);
       window.localStorage.setItem(keys.budgets, JSON.stringify(newBudgets));
     }
   };

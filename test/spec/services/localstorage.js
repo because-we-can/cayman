@@ -3,12 +3,12 @@
 describe('LocalStorageService tests', function() {
 
   var ACCOUNTS_KEY = 'cayman.accounts';
-  var ACCOUNTS_ARRAY = [{name : 'Test account 1'}, {name : 'Test account 2'}];
-  var ACCOUNTS_JSON = JSON.stringify(ACCOUNTS_ARRAY);
+  var ACCOUNT = {name : 'Test account'};
+  var ACCOUNT_JSON = JSON.stringify([ACCOUNT]);
 
   var BUDGETS_KEY = 'cayman.budgets';
-  var BUDGETS_ARRAY = [{name: 'Test budget 1'}, {name : 'Test budget 2'}];
-  var BUDGETS_JSON = JSON.stringify(BUDGETS_ARRAY);
+  var BUDGET = {name: 'Test budget'};
+  var BUDGET_JSON = JSON.stringify([BUDGET]);
 
 	var localStorageService;
 	var store
@@ -17,82 +17,75 @@ describe('LocalStorageService tests', function() {
 		localStorageService = angular.injector(['caymanServices']).get('localStorageService');
 
     store = {};
-	 	spyOn(localStorage, 'getItem').andCallFake(function (key) {return store[key];});
-  	spyOn(localStorage, 'setItem').andCallFake(function (key, value) {return store[key] = value + '';});
-  	spyOn(localStorage, 'clear').andCallFake(function () {store = {};});
+	 	spyOn(window.localStorage, 'getItem').andCallFake(
+      function (key) {return store[key];}
+    );
+  	spyOn(window.localStorage, 'setItem').andCallFake(
+      function (key, value) {return store[key] = value + '';}
+    );
+  	spyOn(window.localStorage, 'clear').andCallFake(
+      function () {store = {};}
+      );
   });
 
   it('gets accounts', function() {
-    store[ACCOUNTS_KEY] = ACCOUNTS_JSON;
+    store[ACCOUNTS_KEY] = ACCOUNT_JSON;
 
-  	var actualAccounts = localStorageService.getAccounts();
+  	var accounts = localStorageService.getAccounts();
 
  		expect(localStorage.getItem).toHaveBeenCalledWith(ACCOUNTS_KEY);
-    expect(actualAccounts).toEqual(ACCOUNTS_ARRAY);
+    expect(accounts).toEqual([ACCOUNT]);
  	});
 
   it('returns an empty array if no accounts to get', function() {
-    var actualAccounts = localStorageService.getAccounts();
+    var accounts = localStorageService.getAccounts();
 
     expect(localStorage.getItem).toHaveBeenCalledWith(ACCOUNTS_KEY);
-    expect(actualAccounts).toEqual([]);
+    expect(accounts).toEqual([]);
   });
 
   it('adds accounts', function() {
-    localStorageService.addAccounts(ACCOUNTS_ARRAY);
+    localStorageService.addAccount(ACCOUNT);
 
-    expect(localStorage.setItem).toHaveBeenCalledWith(ACCOUNTS_KEY, ACCOUNTS_JSON);
-    expect(store[ACCOUNTS_KEY]).toEqual(ACCOUNTS_JSON);
+    expect(window.localStorage.setItem).toHaveBeenCalledWith(ACCOUNTS_KEY, ACCOUNT_JSON);
+    expect(store[ACCOUNTS_KEY]).toEqual(ACCOUNT_JSON);
   });
 
-    it('does nothing if no accounts to add', function() {
-    localStorageService.addAccounts(null);
+  it('does nothing if no accounts to add', function() {
+    localStorageService.addAccount(null);
 
-    expect(localStorage.setItem).wasNotCalled();
-    expect(store[ACCOUNTS_KEY]).toBeUndefined();
-  });
-
-  it('does nothing if empty accounts to add', function() {
-    localStorageService.addAccounts([]);
-
-    expect(localStorage.setItem).wasNotCalled();
+    expect(window.localStorage.setItem).wasNotCalled();
     expect(store[ACCOUNTS_KEY]).toBeUndefined();
   });
 
   it('gets budgets', function() {
-    store[BUDGETS_KEY] = BUDGETS_JSON;
+    store[BUDGETS_KEY] = BUDGET_JSON;
 
-  	var actualBudgets = localStorageService.getBudgets();
+  	var budgets = localStorageService.getBudgets();
 
- 		expect(localStorage.getItem).toHaveBeenCalledWith(BUDGETS_KEY);
-    expect(actualBudgets).toEqual(BUDGETS_ARRAY);
+ 		expect(window.localStorage.getItem).toHaveBeenCalledWith(BUDGETS_KEY);
+    expect(budgets).toEqual([BUDGET]);
  	});
 
   it('returns an empty array if no budgets to get', function() {
-    var actualBudgets = localStorageService.getBudgets();
+    var budgets = localStorageService.getBudgets();
 
     expect(localStorage.getItem).toHaveBeenCalledWith(BUDGETS_KEY);
-    expect(actualBudgets).toEqual([]);
+    expect(budgets).toEqual([]);
   });
 
   it('adds budgets', function() {
-    localStorageService.addBudgets(BUDGETS_ARRAY);
+    localStorageService.addBudget(BUDGET);
 
-    expect(localStorage.setItem).toHaveBeenCalledWith(BUDGETS_KEY, BUDGETS_JSON);
-    expect(store[BUDGETS_KEY]).toEqual(BUDGETS_JSON);
+    expect(localStorage.setItem).toHaveBeenCalledWith(BUDGETS_KEY, BUDGET_JSON);
+    expect(store[BUDGETS_KEY]).toEqual(BUDGET_JSON);
   });
 
   it('does nothing if no budgets to add', function() {
-    localStorageService.addBudgets(null);
+    localStorageService.addBudget(null);
 
     expect(localStorage.setItem).wasNotCalled();
     expect(store[BUDGETS_KEY]).toBeUndefined();
   });
 
-  it('does nothing if empty budgets to add', function() {
-    localStorageService.addBudgets([]);
-
-    expect(localStorage.setItem).wasNotCalled();
-    expect(store[BUDGETS_KEY]).toBeUndefined();
-  });
 });

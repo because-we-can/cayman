@@ -11,7 +11,7 @@ function MainCtrl($scope, localStorageService) {
 
     var toAdd = {name:newAccountName};
     $scope.accounts.push(toAdd);
-    localStorageService.addAccounts(toAdd);
+    localStorageService.addAccount(toAdd);
     $scope.newAccountName = '';
   };
 
@@ -20,7 +20,7 @@ function MainCtrl($scope, localStorageService) {
 
     var toAdd = {name:newBudgetName};
     $scope.budgets.push(toAdd);
-    localStorageService.addBudgets(toAdd);
-    $scope.newBudgetName = ''
+    localStorageService.addBudget(toAdd);
+    $scope.newBudgetName = '';
   }
 };

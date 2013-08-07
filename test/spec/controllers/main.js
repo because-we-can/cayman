@@ -5,57 +5,47 @@ describe('MainCtrl tests', function () {
   var mainCtrl;
   var mockLocalStorageService;
   var scope;
-  var ACCOUNT_NAME = 'A test account';
-  var BUDGET_NAME = "A budget name";
+
+  var EXISITING_ACCOUNT = {name:'An existing account'};
+  var NEW_ACCOUNT = {name:'A new account'};
+  var EXISTING_BUDGET = {name:'An existing budget'};
+  var NEW_BUDGET = {name: 'A new budget'};
 
   beforeEach(inject(function ($controller, $rootScope) {
     mockLocalStorageService = angular.injector(['caymanServices']).get('localStorageService');
-    spyOn(mockLocalStorageService, 'getAccounts').andReturn([{name:ACCOUNT_NAME}]);
-    spyOn(mockLocalStorageService, 'addAccounts');
-    spyOn(mockLocalStorageService, 'getBudgets').andReturn([{name:BUDGET_NAME}]);
-    spyOn(mockLocalStorageService, 'addBudgets');
+    spyOn(mockLocalStorageService, 'getAccounts').andReturn([EXISITING_ACCOUNT]);
+    spyOn(mockLocalStorageService, 'addAccount');
+    spyOn(mockLocalStorageService, 'getBudgets').andReturn([EXISTING_BUDGET]);
+    spyOn(mockLocalStorageService, 'addBudget');
 
     scope = $rootScope.$new();
     mainCtrl = $controller('MainCtrl', {
       $scope: scope,
-      localStorageService: mockLocalStorageService});
+      localStorageService: mockLocalStorageService
+    });
   }));
 
   it('calls the localStorageService to attach accounts to the scope', function () {
-    expect(scope.accounts).toBeDefined();
-    expect(scope.accounts.length).toBe(1);
-    expect(scope.accounts[0].name).toBe(ACCOUNT_NAME);
-
+    expect(scope.accounts).toEqual([EXISITING_ACCOUNT]);
     expect(mockLocalStorageService.getAccounts).toHaveBeenCalled();
   });
 
   it('calls the localStorageService to attach budgets to the scope', function () {
-    expect(scope.budgets).toBeDefined();
-    expect(scope.budgets.length).toBe(1);
-    expect(scope.budgets[0].name).toBe(BUDGET_NAME);
-
+    expect(scope.budgets).toEqual([EXISTING_BUDGET]);
     expect(mockLocalStorageService.getBudgets).toHaveBeenCalled();
   });
 
-  it('adds a new account to the scope and the localStorageService', function() {
-    var newAccountName = 'A new account';
+  it('adds a new account to the scope and calls the localStorageService', function() {
+    scope.addAccount(NEW_ACCOUNT.name);
 
-    scope.addAccount(newAccountName);
-
-    expect(scope.accounts.length).toBe(2);
-    expect(scope.accounts[0].name).toBe(ACCOUNT_NAME);
-    expect(scope.accounts[1].name).toBe(newAccountName);
-    expect(mockLocalStorageService.addAccounts).toHaveBeenCalledWith({name:newAccountName});
+    expect(scope.accounts).toEqual([EXISITING_ACCOUNT, NEW_ACCOUNT]);
+    expect(mockLocalStorageService.addAccount).toHaveBeenCalledWith(NEW_ACCOUNT);
   });
 
-  it('adds a new budget to the scope', function() {
-    var newBudgetName = 'A new budget';
+  it('adds a new budget to the scope and calls the localStorageService', function() {
+    scope.addBudget(NEW_BUDGET.name);
 
-    scope.addBudget(newBudgetName);
-
-    expect(scope.budgets.length).toBe(2);
-    expect(scope.budgets[0].name).toBe(BUDGET_NAME);
-    expect(scope.budgets[1].name).toBe(newBudgetName);
-    expect(mockLocalStorageService.addBudgets).toHaveBeenCalledWith({name:newBudgetName});
+    expect(scope.budgets).toEqual([EXISTING_BUDGET, NEW_BUDGET]);
+    expect(mockLocalStorageService.addBudget).toHaveBeenCalledWith(NEW_BUDGET);
   });
 });
