@@ -6,13 +6,13 @@ describe('Cayman App', function () {
 
     beforeEach(function () {
       browser().navigateTo('/');
+      window.localStorage.clear();
+
     });
 
 
     it('displays the accounts list and a form', function () {
-      expect(repeater('.accounts li', 'accounts list').count()).toBe(3);
-      expect(repeater('.accounts li', 'accounts list').row(0)).toEqual(['Check']);
-      expect(repeater('.accounts li', 'accounts list').row(1)).toEqual(['Savings']);
+      expect(repeater('.accounts li', 'accounts list').count()).toBe(1);
 
       expect(element('.accounts li input', 'new accounts input').html()).toBeDefined();
       expect(element('.accounts li button', 'new accounts button').html()).toBeDefined();

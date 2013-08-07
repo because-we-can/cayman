@@ -14,8 +14,7 @@ describe('LocalStorageService tests', function() {
 	var store
 
 	beforeEach(function() {
-		var $injector = angular.injector(['caymanServices']);
-		localStorageService = $injector.get('localStorageService');
+		localStorageService = angular.injector(['caymanServices']).get('localStorageService');
 
     store = {};
 	 	spyOn(localStorage, 'getItem').andCallFake(function (key) {return store[key];});

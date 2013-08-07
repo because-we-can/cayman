@@ -1,25 +1,26 @@
 'use strict';
 
-angular.module('caymanApp')
-    .controller('MainCtrl', function ($scope) {
-      $scope.accounts = ['Check', 'Savings'];
-      $scope.budgets = ['Vacations', 'New laptop'];
-      $scope.newAccountName = '';
-      $scope.newBudgetName = '';
+function MainCtrl($scope, localStorageService) {
+  $scope.accounts = localStorageService.getAccounts();
+  $scope.budgets = localStorageService.getBudgets();
+  $scope.newAccountName = '';
+  $scope.newBudgetName = '';
 
-      $scope.addAccount = function(newAccountName) {
-        if(!newAccountName) {
-          return;
-        }
-        $scope.accounts.push(newAccountName);
-        $scope.newAccountName = '';
-      };
+  $scope.addAccount = function(newAccountName) {
+    if(!newAccountName) return;
 
-      $scope.addBudget = function(newBudgetName) {
-        if(!newBudgetName) {
-          return;
-        }
-        $scope.budgets.push(newBudgetName);
-        $scope.newBudgetName = ''
-      }
-    });
+    var toAdd = {name:newAccountName};
+    $scope.accounts.push(toAdd);
+    localStorageService.addAccounts(toAdd);
+    $scope.newAccountName = '';
+  };
+
+  $scope.addBudget = function(newBudgetName) {
+    if(!newBudgetName) return;
+
+    var toAdd = {name:newBudgetName};
+    $scope.budgets.push(toAdd);
+    localStorageService.addBudgets(toAdd);
+    $scope.newBudgetName = ''
+  }
+};

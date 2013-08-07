@@ -4,7 +4,7 @@
   <div class="accounts">
     <h3>{{accounts.length}} account(s)</h3>
     <ul>
-      <li ng-repeat="account in accounts">{{account}}</li>
+      <li ng-repeat="account in accounts">{{account.name}}</li>
       <li>
         <form name="newAccountForm">
           <input name="newAccountInput" type="text" ng-model="newAccountName" required>
@@ -18,7 +18,7 @@
   <div class="budgets">
     <h3>{{budgets.length}} budget(s)</h3>
     <ul class="budgets">
-      <li ng-repeat="budget in budgets">{{budget}}</li>
+      <li ng-repeat="budget in budgets">{{budget.name}}</li>
       <li>
         <form name="newBudgetForm">
           <input name="newBudgetInput" type="text" ng-model="newBudgetName" required>
