@@ -4,11 +4,13 @@
   <div class="accounts">
     <h3>{{accounts.length}} account(s)</h3>
     <ul>
-      <li ng-repeat="account in accounts">{{account.name}}</li>
+      <li ng-repeat="account in accounts">
+        {{account.name}}&nbsp;<button ng-click="removeAccount($index);">X</a>
+      </li>
       <li>
         <form name="newAccountForm">
-          <input name="newAccountInput" type="text" ng-model="newAccountName" required>
-          <button ng-disabled = "newAccountForm.newAccountInput.$error.required" ng-click="addAccount(newAccountName)">+</button>
+          <input placeholder="New account name..." name="newAccountInput" type="text" ng-model="newAccountName" required>&nbsp;
+          <button ng-disabled="newAccountForm.newAccountInput.$error.required" ng-click="addAccount(newAccountName);">+</button>
         </form>
       </li>
     </ul>
@@ -18,10 +20,12 @@
   <div class="budgets">
     <h3>{{budgets.length}} budget(s)</h3>
     <ul class="budgets">
-      <li ng-repeat="budget in budgets">{{budget.name}}</li>
+      <li ng-repeat="budget in budgets">
+        {{budget.name}}&nbsp;<button ng-click="removeBudget($index);">X</button>
+      </li>
       <li>
         <form name="newBudgetForm">
-          <input name="newBudgetInput" type="text" ng-model="newBudgetName" required>
+          <input placeholder= "New budget name..." name="newBudgetInput" type="text" ng-model="newBudgetName" required>
           <button ng-disabled="newBudgetForm.newBudgetInput.$error.required" ng-click="addBudget(newBudgetName)">+</button>
         </form>
       </li>

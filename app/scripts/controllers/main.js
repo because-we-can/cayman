@@ -20,12 +20,15 @@ function MainCtrl($scope, localStorageService) {
     localStorageService.addBudget({name:newBudgetName});
     $scope.budgets = localStorageService.getBudgets();
     $scope.newBudgetName = '';
-  }
+  };
 
-  $scope.removeAccount = function(oldAccountName) {
-    if(!oldAccountName) return;
-
-    localStorageService.removeAccount({name:oldAccountName});
+  $scope.removeAccount = function(index) {
+    localStorageService.removeAccount($scope.accounts[index]);
     $scope.accounts = localStorageService.getAccounts();
-  }
+  };
+
+  $scope.removeBudget = function(i) {
+    localStorageService.removeBudget($scope.budgets[i]);
+    $scope.budgets = localStorageService.getBudgets();
+  };
 };

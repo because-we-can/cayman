@@ -62,7 +62,7 @@ angular.module('caymanServices', [])
       if(indexToRemove < 0) return;
 
       budgets.splice(indexToRemove, 1);
-      set(BUDGETS_KEY, budgets)
+      set(BUDGETS_KEY, budgets);
     }
   };
 });
