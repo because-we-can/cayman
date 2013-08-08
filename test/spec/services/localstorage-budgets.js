@@ -54,4 +54,21 @@ describe('LocalStorageService tests', function() {
     expect(store[BUDGETS_KEY]).toBeUndefined();
   });
 
+  it('removes a budget', function(){
+    store[BUDGETS_KEY] = BUDGET_JSON;
+
+    localStorageService.removeBudget(BUDGET);
+
+    expect(store[BUDGETS_KEY]).toEqual('[]');
+  });
+
+  it('does nothing if no budget to remove', function() {
+    store[BUDGETS_KEY] = BUDGET_JSON;
+
+    localStorageService.removeBudget(null);
+
+    expect(store[BUDGETS_KEY]).toEqual(BUDGET_JSON);
+    expect(window.localStorage.setItem).wasNotCalled();
+  });
+
 });

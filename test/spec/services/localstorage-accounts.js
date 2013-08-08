@@ -21,7 +21,7 @@ describe('LocalStorageService tests for accounts', function() {
     );
   	spyOn(window.localStorage, 'clear').andCallFake(
       function () {store = {};}
-      );
+    );
   });
 
   it('gets accounts', function() {
@@ -47,11 +47,36 @@ describe('LocalStorageService tests for accounts', function() {
     expect(store[ACCOUNTS_KEY]).toEqual(ACCOUNT_JSON);
   });
 
+  it('does not add the same account twice', function() {
+    localStorageService.addAccount(ACCOUNT);
+    localStorageService.addAccount(ACCOUNT);
+
+    expect(window.localStorage.setItem).toHaveBeenCalledWith(ACCOUNTS_KEY, ACCOUNT_JSON);
+    expect(store[ACCOUNTS_KEY]).toEqual(ACCOUNT_JSON);
+  });
+
   it('does nothing if no accounts to add', function() {
     localStorageService.addAccount(null);
 
     expect(window.localStorage.setItem).wasNotCalled();
     expect(store[ACCOUNTS_KEY]).toBeUndefined();
+  });
+
+  it('removes an account', function() {
+    store[ACCOUNTS_KEY] = ACCOUNT_JSON;
+
+    localStorageService.removeAccount(ACCOUNT);
+
+    expect(store[ACCOUNTS_KEY]).toEqual('[]');
+  });
+
+  it('does nothing if no account to remove', function() {
+    store[ACCOUNTS_KEY] = ACCOUNT_JSON;
+
+    localStorageService.removeAccount(null);
+
+    expect(store[ACCOUNTS_KEY]).toEqual(ACCOUNT_JSON);
+    expect(window.localStorage.setItem).wasNotCalled();
   });
 
 });
