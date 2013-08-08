@@ -10,13 +10,19 @@ describe('MainCtrl tests', function () {
   var NEW_ACCOUNT = {name:'A new account'};
   var EXISTING_BUDGET = {name:'An existing budget'};
   var NEW_BUDGET = {name: 'A new budget'};
+  var accountsStore = [EXISITING_ACCOUNT];
+  var budgetsStore = [EXISTING_BUDGET];
 
   beforeEach(inject(function ($controller, $rootScope) {
     mockLocalStorageService = angular.injector(['caymanServices']).get('localStorageService');
-    spyOn(mockLocalStorageService, 'getAccounts').andReturn([EXISITING_ACCOUNT]);
-    spyOn(mockLocalStorageService, 'addAccount');
-    spyOn(mockLocalStorageService, 'getBudgets').andReturn([EXISTING_BUDGET]);
-    spyOn(mockLocalStorageService, 'addBudget');
+    spyOn(mockLocalStorageService, 'getAccounts').andReturn(accountsStore);
+    spyOn(mockLocalStorageService, 'addAccount').andCallFake(function(newAccount) {
+      accountsStore.push(newAccount);
+    });
+    spyOn(mockLocalStorageService, 'getBudgets').andReturn(budgetsStore);
+    spyOn(mockLocalStorageService, 'addBudget').andCallFake(function(newBudget) {
+      budgetsStore.push(newBudget);
+    });
 
     scope = $rootScope.$new();
     mainCtrl = $controller('MainCtrl', {
@@ -40,6 +46,7 @@ describe('MainCtrl tests', function () {
 
     expect(scope.accounts).toEqual([EXISITING_ACCOUNT, NEW_ACCOUNT]);
     expect(mockLocalStorageService.addAccount).toHaveBeenCalledWith(NEW_ACCOUNT);
+    expect(mockLocalStorageService.getAccounts).toHaveBeenCalled();
   });
 
   it('adds a new budget to the scope and calls the localStorageService', function() {
@@ -47,5 +54,6 @@ describe('MainCtrl tests', function () {
 
     expect(scope.budgets).toEqual([EXISTING_BUDGET, NEW_BUDGET]);
     expect(mockLocalStorageService.addBudget).toHaveBeenCalledWith(NEW_BUDGET);
+    expect(mockLocalStorageService.getAccounts).toHaveBeenCalled();
   });
 });

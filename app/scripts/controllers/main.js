@@ -9,18 +9,23 @@ function MainCtrl($scope, localStorageService) {
   $scope.addAccount = function(newAccountName) {
     if(!newAccountName) return;
 
-    var toAdd = {name:newAccountName};
-    $scope.accounts.push(toAdd);
-    localStorageService.addAccount(toAdd);
+    localStorageService.addAccount({name:newAccountName});
+    $scope.accounts = localStorageService.getAccounts();
     $scope.newAccountName = '';
   };
 
   $scope.addBudget = function(newBudgetName) {
     if(!newBudgetName) return;
 
-    var toAdd = {name:newBudgetName};
-    $scope.budgets.push(toAdd);
-    localStorageService.addBudget(toAdd);
+    localStorageService.addBudget({name:newBudgetName});
+    $scope.budgets = localStorageService.getBudgets();
     $scope.newBudgetName = '';
+  }
+
+  $scope.removeAccount = function(oldAccountName) {
+    if(!oldAccountName) return;
+
+    localStorageService.removeAccount({name:oldAccountName});
+    $scope.accounts = localStorageService.getAccounts();
   }
 };
