@@ -1,9 +1,14 @@
 'use strict';
 
-angular.module('caymanApp', ['caymanServices'])
-  .config(function ($routeProvider) {
+angular.module('caymanServices', []);
+angular.module('caymanControllers', ['caymanServices']);
+angular.module('caymanApp', ['caymanControllers']);
+
+angular.module('caymanApp')
+.config(
+  function ($routeProvider, MainCtrl) {
     $routeProvider
-      .when('/', {templateUrl: 'views/main.html', controller: 'MainCtrl'})
-      .otherwise({redirectTo: '/'})
-    });
+    .when('/', {templateUrl: 'views/main.html', controller: MainCtrl})
+    .otherwise({redirectTo: '/'});
+  });
 
